@@ -64,7 +64,7 @@ class NewVisitorTest(unittest.TestCase):
         # He types "Pray Asr" intot he text box
         inputbox.send_keys('Pray Asr')
 
-        # Whe he hits enter the page updates, and show the to-do item lists
+        # When he hits enter the page updates, and show the to-do item lists
         inputbox.send_keys(Keys.Enter)
         time.sleep(1)
 
