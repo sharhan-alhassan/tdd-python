@@ -1,5 +1,6 @@
 
 
+from datetime import time
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 import unittest
@@ -47,10 +48,29 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
 
         # He notices the title of the app say 'todo-list'
-        self.assertIn('install', self.browser.title)
-        #self.fail('Finish the test!')
+        self.assertIn('To-Do list', self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('To-Do', header_text)
 
+        # She is invited to enter a to-do item straight away
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
+
+        # He types "Pray Asr" intot he text box
+        inputbox.send_keys('Pray Asr')
+
+        # Whe he hits enter the page updates, and show the to-do item lists
+        inputbox.send_keys(keys.Enter)
+        time.sleep(1)
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertTrue(
+            any(row.text == '1: Pray Asr' for row in rows)
+        )
         # He is invited to enter an item in todo-list
+
+        self.fail('Finish the test!')
 
 if __name__ == "__main__":
     unittest.main(warnings='ignore')
