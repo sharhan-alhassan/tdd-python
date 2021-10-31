@@ -3,6 +3,7 @@
 from datetime import time
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 '''
@@ -37,8 +38,12 @@ browser.quit()
 
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
-        self.opts = FirefoxOptions().add_argument("--headless")
-        self.browser = webdriver.Firefox(firefox_options=self.opts)
+        # self.opts = FirefoxOptions().add_argument("--headless")
+        # self.browser = webdriver.Firefox(firefox_options=self.opts)
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument("--headless")
+        self.chrome_options.add_argument("--disable-gpu")
+        self.browser = webdriver.Chrome(options=self.chrome_options)
 
     def tearDown(self):
         self.browser.quit()
@@ -60,7 +65,7 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys('Pray Asr')
 
         # Whe he hits enter the page updates, and show the to-do item lists
-        inputbox.send_keys(keys.Enter)
+        inputbox.send_keys(Keys.Enter)
         time.sleep(1)
 
         table = self.browser.find_element_by_id('id_list_table')
