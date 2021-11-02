@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(g87*#g@4#tb6mn%(#swf@rk)+@ew(+y76+ivo=5ip@uo5^&=c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '18.212.140.209']
 
 
 # Application definition
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'superlists.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'database/db.sqlite3',
+        'NAME': BASE_DIR / '../database/db.sqlite3',
     }
 }
 
